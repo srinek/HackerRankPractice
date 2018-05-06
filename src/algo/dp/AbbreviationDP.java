@@ -1,6 +1,5 @@
 package algo.dp;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class AbbreviationDP {

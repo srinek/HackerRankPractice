@@ -23,7 +23,26 @@ public class SolutionLeftRotation {
 		}
 	}
 	
-	public int findLastIndexAfterRotation(int[] a, int rotateBy){
+	public int[] leftRotate(int[] a, int rotateBy){
+		
+		int mod = rotateBy/a.length;
+		if( mod > 0 ) {
+			rotateBy = rotateBy  - mod * a.length ;
+		}
+		int[] barr = new int[a.length];
+		int bIndex = 0;
+		for(int i = rotateBy; i < a.length; i++){
+			barr[bIndex++] = a[i];
+		}
+		for(int i = 0; i < rotateBy; i++){
+			barr[bIndex++] = a[i];
+		}
+		return barr;
+		
+	}
+	
+	
+	/*public int findLastIndexAfterRotation(int[] a, int rotateBy){
 		int ret = (a.length - 1) - rotateBy;
 		while(ret < 0){
 			ret = ret + a.length;
@@ -47,5 +66,5 @@ public class SolutionLeftRotation {
 			barr[k++] = a[i++];
 		}
 		return barr;
-	}
+	}*/
 }

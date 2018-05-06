@@ -1,7 +1,5 @@
 package algo.stack;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -21,58 +19,34 @@ public class PoinsonousTree {
 		}
 		
 	public static int findGoodDay(Integer[] array){
-			
-			//List<Integer> newarr = new ArrayList<>();
-			int prev = Integer.MAX_VALUE;
-			int tempprev = Integer.MAX_VALUE;
-	        Map<Integer, Integer> output = new HashMap<>();
-			int lastday = 1;
-			for(int a : array){
-				if(a <= prev){
-					//newarr.add(a);
-					prev = a;
-					tempprev = a;
-					resetStacks(output);
-				}
-				else{
-					if(a > tempprev){
-	                   //Integer stack = output.get(1);
-	                   output.put(1, a);
-	                }
-					else{
-						int tempday = 2;
-						boolean matchFound = false;
-						while(output.get(tempday) == -1){
-							Integer stack = output.get(tempday);
-							int top = 0;//stack.peek();
-							if(a > top){
-								//output.get(tempday - 1).push(a);
-								matchFound = true;
-								break;
-							}
-							tempday++;
-						}
-						if(!matchFound){
-							output.put(tempday, a);
-							if(tempday > lastday){
-								lastday = tempday;
-							}
-						}
-					}
-					tempprev = a;
+	   
+		if(array.length == 0){
+			return 0;
+		}
+		int[] deathDay = new int[array.length];
+		deathDay[0] = 0;
+		int minThusFar = array[0];
+		Stack<Integer> stack = new Stack<>();
+		int totaldays = 0;
+		for(int i = 1; i < array.length; i++){
+			if(array[i] > array[i-1]){
+				deathDay[i] = 1;
+			}
+			if(array[i] < minThusFar){
+				minThusFar =  array[i];
+			}
+			if(array[i] > minThusFar){  // true means this tree will die one day.
+				while(!stack.isEmpty() && array[i] <= array[stack.peek()]){
+					deathDay[i] =  deathDay[i] > deathDay[stack.peek()] + 1 ? deathDay[i] : deathDay[stack.peek()] + 1; 
+					stack.pop();
 				}
 			}
-			return lastday;
+			stack.push(i);
+			totaldays = deathDay[i] > totaldays ? deathDay[i] : totaldays;
 		}
+		
+		return totaldays;
+	 		
+	}
 
-		private static void resetStacks(Map<Integer, Integer> output) {
-			
-			for(int i : output.keySet()){
-				Stack<Integer> s = null;//output.get(i);
-				while(!s.isEmpty()){
-					s.pop();
-				}
-			}
-			
-		}
 }

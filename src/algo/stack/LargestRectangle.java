@@ -1,5 +1,6 @@
 package algo.stack;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class LargestRectangle {
@@ -51,4 +52,6 @@ public class LargestRectangle {
 		}
 		return maxSumOfAll;
 	}
+	
+	
 }
