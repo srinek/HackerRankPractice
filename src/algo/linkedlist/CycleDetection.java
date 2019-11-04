@@ -4,7 +4,7 @@ public class CycleDetection {
 	
 	
 	public static void main(String[] args) {
-		Node list1 = LinkedListUtils.createCyclicLinkedList(new int[]{2 , 4 , 3 , 5 , 7});
+		Node list1 = LinkedListUtils.createCyclicLinkedList(new int[]{2 , 4 , 3 , 5 , 7, 2});
 		LinkedListUtils.printList(list1);
 		boolean hasCycle = hasCycle(list1);
 		System.out.println(hasCycle);

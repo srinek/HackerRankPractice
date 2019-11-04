@@ -1,36 +1,43 @@
 package algo.arrays;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.Arrays;
+import java.util.Stack;
 
+//https://www.geeksforgeeks.org/the-stock-span-problem/
 public class StockSpan {
 
 	
+	
 	public static void main(String[] args) {
-		StockSpan.stockInput(new int[]{ 4, 5, 10, 9, 3, 4, 5,6, 7, 8});
+		//System.out.println(Arrays.toString(stockInput(new int[]{ 100, 80, 60, 70, 60, 75, 85 })));
+		System.out.println(Arrays.toString(stockInput(new int[]{3,2,6,5,0,3 })));
 	}
 	
-     // 3 4 5 10 9 3 4 7 8
-	public static void stockInput(int[] input){
+	public static int[] stockInput(int[] input){
 		
-	
-		int local = 0;
-		List<Integer> retList = new ArrayList<>();
-		int ret = 0;
-		for(int k : input){
-			if(k > local){
-		    	ret++;
-		    }
-		    else{
-		    	retList.add(ret);
-		    	ret = 0;
-		    }
-		    local = k;
+	  	
+		if(input == null || input.length == 0){
+			return null;
 		}
-		retList.add(ret);
-		System.out.println(retList);
+		int[] span = new int[input.length];
+		Stack<Integer> stack = new Stack<>();
+		span[0] = 1;
+		stack.push(0);
+		
+		for(int i=1; i<input.length; i++){
+			
+			while(!stack.isEmpty() && input[stack.peek()] <= input[i]){
+				stack.pop();
+			}
+			
+			if(!stack.isEmpty()){
+				span[i] = i - stack.peek();
+			}
+			stack.push(i);
+		}
+		
+		return span;
+		
 	}
 
 }

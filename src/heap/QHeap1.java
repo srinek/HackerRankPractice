@@ -13,7 +13,9 @@ public class QHeap1 {
 			heap = new int[max+1]; // 1 based index
 		}
 		
-		// 0 1 4 3 10 9 6
+		//   0 1 4 3 10 9 6
+		//   5 9 21 14 7 32  18
+		// 0 1 2 3  4  5  6  7
 		public boolean insert(int val){
 			
 			heapsize++; // 1 based index

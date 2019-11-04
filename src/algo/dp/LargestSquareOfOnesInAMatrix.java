@@ -4,16 +4,42 @@ public class LargestSquareOfOnesInAMatrix {
 	
 	
 	public static void main(String[] args) {
-		int[][] input = new int[2][2];
+		/*int[][] input = new int[2][2];
 		input[0][0] = 1;
 		input[0][1] = 1;
 		input[1][0] = 1;
-		input[1][1] = 1;
-		System.out.println(findLargestSquareOfOnes(input));
+		input[1][1] = 1;*/
+		char[][] input = new char[1][2];
+		input[0][0] = '1';
+		input[0][1] = '0';
+		System.out.println(findMaximalSquare(input, 1, 2));
 		
 	}
+	
+	private static int findMaximalSquare(char[][] matrix, int m, int n){
+        
+        int[][] output = new int[m+1][n+1];
+        int max = 0;
+        for(int i=1; i<m+1; i++){
+            for(int j=1; j<n+1; j++){
+                if(matrix[i-1][j-1] == '1'){
+                    output[i][j] = 1+ 
+                        findMin(output[i-1][j], output[i-1][j-1], output[i][j-1]);
+                    max = Math.max(max, output[i][j]);
+                }
+                
+            }
+        }
+        return max;
+    }
+    
+    private static int findMin(int k, int l, int m){
+        
+        int temp = Math.min(k, l);
+        return Math.min(temp, m);
+    }
 
-	public static int findLargestSquareOfOnes(int[][] input){
+	/*public static int findLargestSquareOfOnes(int[][] input){
 		
 		if(input == null || input.length == 0){
 			return 0;
@@ -53,7 +79,7 @@ public class LargestSquareOfOnesInAMatrix {
 			min = input[i-1][j-1];
 		}
 		return min;
-	}
+	}*/
 	
 	
 }

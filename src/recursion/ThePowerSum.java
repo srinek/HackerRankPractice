@@ -15,10 +15,36 @@ public class ThePowerSum {
 			pow = (int)Math.pow(max, n);
 		}
 		System.out.println(powsum(x, n, --max));*/
-		System.out.println(powsum(x, n, 0));
+		System.out.println(powsum(x, n, 1));
 		scan.close();
 	}
+	
 	private static int powsum(int x, int n, int start){
+		
+		int tempX = x - (int)Math.pow(start, n);
+		
+		if(tempX == 0){
+			return 1;
+		}
+		if(tempX < 0){
+			return 0;
+		}
+		int incr = ++start;
+		return powsum(tempX, n, incr) + powsum(x, n, incr);
+	}
+	
+	/*
+	  ( 10, 1)
+	  (9, 2)+(10, 2)
+	  (5, 3)+(9, 3)+(6,3)+(10,3)
+	  0+ 1+0+(1, 4)+(10,4)
+	  0+1+0+0+0
+	  
+	 * 
+	 */
+	
+	
+	/*private static int powsum(int x, int n, int start){
 		x = x - (int)Math.pow(start, n);
 		if(x == 0){
 			return 1;
@@ -31,7 +57,7 @@ public class ThePowerSum {
 			sum += powsum(x, n, j);
 		}
 		return sum;
-	}
+	}*/
 	
 	
 	

@@ -1,6 +1,8 @@
 package heap;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class JesseAndCookies {
@@ -118,16 +120,37 @@ public class JesseAndCookies {
 		}
 	}
 
+	
+	private static int mixElemsLessThanK(Queue<Integer> heapQ, int k){
+		
+		int result = 0;
+		while(!heapQ.isEmpty() && heapQ.peek() < k){
+			int first = heapQ.poll();
+			int second = 0;
+			if(!heapQ.isEmpty()){
+				second = heapQ.poll();
+			}
+			heapQ.add((first*1) + (second*2));
+			result++;
+		}
+		return result;
+	}
+	
+	
 	public static void main(String[] args) {
 
 		Scanner scan = new Scanner(System.in);
 		int n = scan.nextInt();
 		int k = scan.nextInt();
-		Heap heap = new Heap(n);
+		//Heap heap = new Heap(n);
+		Queue<Integer> heapQ = new PriorityQueue<>();
 		for (int i = 0; i < n; i++) {
-			heap.insert(scan.nextInt());
+			int temp = scan.nextInt();
+			//heap.insert(temp);
+			heapQ.add(temp);
 		}
-		System.out.println(heap.mixElemsLessThanK(k));
+		//System.out.println(heap.mixElemsLessThanK(k));
+		System.out.println(mixElemsLessThanK(heapQ, k));
 		scan.close();
 	}
 }

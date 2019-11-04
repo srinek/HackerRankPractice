@@ -235,12 +235,13 @@ public class MinimumSpanningTreeKrushkals {
 			}
 			Node node1 = edges.get(i).getNode1();
 			Node node2 = edges.get(i).getNode2();
+			// check if the mstedges form a circle.
 			if(findParent(parent, node1.getIndex()) == findParent(parent, node2.getIndex())){
 				//circle
 				continue;
 			}
 			union(parent, rank, node1.getIndex(), node2.getIndex());
-			// check if the mstedges form a circle.
+			
 			mstEdges.add(edges.get(i));
 		}
 		System.out.println(mstEdges);

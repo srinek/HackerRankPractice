@@ -2,6 +2,10 @@ package algo.arrays;
 
 import java.util.Scanner;
 
+
+/*
+ * https://www.hackerrank.com/challenges/sparse-arrays/problem
+ */
 public class SolutionSparseArrays {
 	
 	public static void main(String[] args) {

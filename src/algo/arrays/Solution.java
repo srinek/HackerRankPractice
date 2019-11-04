@@ -1,6 +1,5 @@
 package algo.arrays;
 
-import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Scanner;

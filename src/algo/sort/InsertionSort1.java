@@ -19,6 +19,7 @@ public class InsertionSort1 {
 	//1 4 3 5 6 2
 	private static void sort(int[] arr){
 		
+		
 		int length = arr.length;
 		
 		for(int i =1; i<length; i++){

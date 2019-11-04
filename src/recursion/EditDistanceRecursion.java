@@ -4,10 +4,10 @@ public class EditDistanceRecursion {
 	
    private static int matchStrings(String x, String y,int i, int j){
 		if(i == x.length()){
-			return y.length() - j; 
+			return y.length() - j;  // cost of insert of remaining Y
 		}
 		if(j == y.length()){
-			return x.length() - i;
+			return x.length() - i; // cost of delete of remaining X
 		}
 		if(x.charAt(i) == y.charAt(j)){
 			return matchStrings(x, y, i+1, j+1);

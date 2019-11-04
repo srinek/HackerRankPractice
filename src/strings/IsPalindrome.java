@@ -1,36 +1,27 @@
 package strings;
 
-import java.util.Arrays;
-
 public class IsPalindrome {
 	
 	public static void main(String[] args) {
-		System.out.println(isPalindrome("ababczz"));
+		//System.out.println(isPalindrome("ababczz"));
+		System.out.println(isPalindrome("a but tuba"));
 	}
 
 	public static boolean isPalindrome(String inp){
-		
-		char[] charArray = inp.toCharArray();
-		int[] count = new int[255];
-		for(char c : charArray){
-			count[c]++;
+
+		if(inp == null){
+			return false;
 		}
-		System.out.println(Arrays.toString(count));
-		boolean palindrome = true;
-		boolean allowOnlyone = false;
-		for(int i : count){
-			if(i == 0){
-				continue;
+		inp = inp.replace(" ", "");
+		int i = 0, j=inp.length()-1;
+		while( i <= j){
+			
+			if(inp.charAt(i) != inp.charAt(j)){
+				return false;
 			}
-			if(i == 1 && !allowOnlyone){
-				allowOnlyone = true;
-				continue;
-			}
-			if(i != 2){
-				palindrome = false;
-			}
+			i++;
+			j--;
 		}
-		
-		return palindrome;
+		return true;
 	}
 }

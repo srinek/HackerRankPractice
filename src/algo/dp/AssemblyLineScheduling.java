@@ -1,14 +1,12 @@
 package algo.dp;
 
-import java.util.Arrays;
-
 public class AssemblyLineScheduling {
 	
 	public static void main(String[] args) {
 		int n = 6;
 		int e1 = 2;
 		int e2 = 4;
-		int[] s1 = {7, 9 , 3, 4, 8, 4};
+		int[] s1 = {7, 9, 3, 4, 8, 4};
 		int[] s2 = {8, 5, 6, 4, 5, 7};
 		int[] t1 = {2, 3, 1, 3, 4};
 		int[] t2 = {2, 1, 2, 2, 1};
@@ -80,14 +78,6 @@ public class AssemblyLineScheduling {
 			printLinePath(l1, l2, l2[station-1], --station);
 		}
 		
-	}
-
-	private static int min(int i1, int i2) {
-		
-		if(i1 < i2){
-			return i1;
-		}
-		return i2;
 	}
 
 }

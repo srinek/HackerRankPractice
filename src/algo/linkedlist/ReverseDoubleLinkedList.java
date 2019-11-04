@@ -21,9 +21,7 @@ public class ReverseDoubleLinkedList {
 			head.next = prev;
 			head.prev = temp;
 			prev = head;
-			if(temp != null){
-				head = temp;
-			}
+			head = temp;
 		}
 		return head;
 	}

@@ -1,7 +1,6 @@
 package algo.arrays;
 
-import java.io.*;
-import java.util.*;
+import java.util.Scanner;
 
 public class SolutionHourglass {
 

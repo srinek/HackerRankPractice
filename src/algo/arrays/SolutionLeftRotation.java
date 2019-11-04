@@ -1,5 +1,6 @@
 package algo.arrays;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class SolutionLeftRotation {
@@ -7,7 +8,7 @@ public class SolutionLeftRotation {
 	public static void main(String[] args) {
 		
 		
-		Scanner scan = new Scanner(System.in);
+		/*Scanner scan = new Scanner(System.in);
 		int arrLength = scan.nextInt();
 		int rotateBy = scan.nextInt();
 		int[] input = new int[arrLength];
@@ -20,7 +21,13 @@ public class SolutionLeftRotation {
 		int[] temp = s.leftRotate(input, rotateBy);
 		for(int k : temp){
 			System.out.print(k +" ");
-		}
+		}*/
+		
+		int[] input = new int[]{1, 2, 3, 4, 5, 6, 7};
+		SolutionLeftRotation s = new SolutionLeftRotation();
+		int[] temp = s.leftRotate(input, 10);
+		//int[] temp = s.rotate(input,10);
+		System.out.println("rotation " + Arrays.toString(temp));
 	}
 	
 	public int[] leftRotate(int[] a, int rotateBy){
@@ -39,6 +46,28 @@ public class SolutionLeftRotation {
 		}
 		return barr;
 		
+	}
+	
+	/*
+	 * right rotation or regular rotation
+	 */
+	public int[] rotate(int[] arr, int rotateBy){
+		
+		int mod = rotateBy/arr.length;
+		if(mod > 0){
+			rotateBy = rotateBy - arr.length * mod;
+		}
+		
+		int[] barr = new int[arr.length];
+		
+		for(int i=0; i<arr.length-rotateBy; i++){
+			barr[i+rotateBy] = arr[i];
+		}
+		for(int i=arr.length-rotateBy, j=0; i<arr.length; i++, j++){
+			barr[j] = arr[i];
+		}
+		
+		return barr;
 	}
 	
 	
