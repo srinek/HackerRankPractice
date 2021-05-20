@@ -3,140 +3,102 @@ package strings;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * https://leetcode.com/problems/integer-to-english-words/
+ * Convert a non-negative integer num to its English words representation.
+ *
+ *
+ *
+ * Example 1:
+ *
+ * Input: num = 123
+ * Output: "One Hundred Twenty Three"
+ * Example 2:
+ *
+ * Input: num = 12345
+ * Output: "Twelve Thousand Three Hundred Forty Five"
+ * Example 3:
+ *
+ * Input: num = 1234567
+ * Output: "One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"
+ * Example 4:
+ *
+ * Input: num = 1234567891
+ * Output: "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred Ninety One"
+ */
 public class IntegerToWords {
 
-	private static Map<Integer, String> numberMap = new HashMap<>();
-    private static Map<Integer, String> tenMap = new HashMap<>();
-    
-    static{
-        numberMap.put(0, " Zero");
-        numberMap.put(1, " One");
-        numberMap.put(2, " Two");
-        numberMap.put(3, " Three");
-        numberMap.put(4, " Four");
-        numberMap.put(5, " Five");
-        numberMap.put(6, " Six");        
-        numberMap.put(7, " Seven");
-        numberMap.put(8, " Eight");
-        numberMap.put(9, " Nine");
-        numberMap.put(10, " Ten");
-        
-        tenMap.put(1, " One");
-        tenMap.put(10, " Ten");
-        tenMap.put(11, " Eleven");
-        tenMap.put(12, " Twelve");
-        tenMap.put(13, " Thriteen");
-        tenMap.put(14, " Fourteen");
-        tenMap.put(15, " Fifteen");
-        tenMap.put(16, " Sixteen");
-        tenMap.put(17, " Seventeen");
-        tenMap.put(18, " Eighteen");
-        tenMap.put(19, " Nineteen");
-        tenMap.put(2, " Twenty");
-        tenMap.put(3, " Thirty");
-        tenMap.put(4, " Forty");
-        tenMap.put(5, " Fifty");
-        tenMap.put(6, " Sixty");        
-        tenMap.put(7, " Seventy");
-        tenMap.put(8, " Eighty");
-        tenMap.put(9, " Ninety");
-    }
-    
-    
-    public static void main(String[] args) {
-    	IntegerToWords sol = new IntegerToWords();
-    	System.out.println(sol.numberToWords(20).trim());
-	}
-    
-	// 1234567891
+    private static String[] ones = new String[] {
+        "",
+        "One",
+        "Two",
+        "Three",
+        "Four",
+        "Five",
+        "Six",
+        "Seven",
+        "Eight",
+        "Nine"
+    };
+    private static String[] _ltens = new String[] {
+        "Ten",
+        "Eleven",
+        "Twelve",
+        "Thirteen",
+        "Fourteen",
+        "Fifteen",
+        "Sixteen",
+        "Seventeen",
+        "Eighteen",
+        "Nineteen"
+    };
+    private static String[] _lhun = new String[] {
+        "",
+        "",
+        "Twenty",
+        "Thirty",
+        "Forty",
+        "Fifty",
+        "Sixty",
+        "Seventy",
+        "Eighty",
+        "Ninety"
+    };
+
     public String numberToWords(int num) {
-    	
-    	return numberToWordsHelper(num).trim();
+        if(num == 0) {
+            return "Zero";
+        }
+        return helper(num).trim();
     }
-    public String numberToWordsHelper(int num) {
-        
+
+    public String helper(int num) {
         StringBuilder result = new StringBuilder();
-        
-        // check billions
-        int temp = getBillions(num, '/');
-        if(temp > 0){
-            result.append(numberToWordsHelper(temp)).append(" Billion");
-            num = getBillions(num, '%');
+        if (num < 10) {
+            result.append(ones[num]);
+        } else if (num < 20) {
+            result.append(_ltens[num%10]);
+        } else if (num < 100) {
+            result.append(_lhun[num / 10]);
+            result.append(" ");
+            result.append(ones[num % 10]);
+        } else if (num < 1000) {
+            result.append(ones[num / 100]);
+            result.append(" Hundred ");
+            result.append(helper(num % 100));
+        } else if (num < 1000000) {
+            result.append(helper(num / 1000));
+            result.append(" Thousand ");
+            result.append(helper(num % 1000));
+        } else if (num < 1000000000) {
+            result.append(helper(num / 1000000));
+            result.append(" Million ");
+            result.append(helper(num % 1000000));
+        } else {
+            result.append(helper(num / 1000000000));
+            result.append(" Billion ");
+            result.append(helper(num % 1000000000));
         }
-        //check millions
-        temp = getMillions(num, '/');
-        if(temp > 0){
-            result.append(numberToWordsHelper(temp)).append(" Million");
-            num = getMillions(num, '%');
-        }
-        //check 100 thousands
-        temp = get100Thousands(num, '/');
-        if(temp > 0){
-            result.append(numberToWordsHelper(temp)).append(" Hundred");
-            num = get100Thousands(num, '%');
-        }
-        
-        temp = getThousands(num, '/');
-        if(temp > 0){
-            result.append(numberToWordsHelper(temp)).append(" Thousand");
-            num = getThousands(num, '%');
-        }
-        
-        temp = getHundreds(num, '/');
-        if(temp > 0){
-            result.append(numberToWordsHelper(temp)).append(" Hundred");
-            num = getHundreds(num, '%');
-        }
-        
-        temp = getTens(num, '/');
-        if(temp > 1){
-            result.append(tenMap.get(temp));
-            num = getTens(num, '%');
-        }
-         if(num/10 == 1){
-            result.append(tenMap.get(num));
-        }
-        if(num/10 == 0){
-            result.append(numberMap.get(num));
-        }
-        return result.toString();
-    }
-    
-    private int getBillions(int num, char op){
-        if(op == '%'){
-            return num % 1000000000;
-        }
-        return num / 1000000000;
-    }
-    
-    private int getMillions(int num, char op){
-         if(op == '%'){
-            return num % 1000000;
-        }
-        return num / 1000000;
-    }
-    private int get100Thousands(int num, char op){
-        if(op == '%'){
-            return num % 100000;
-        }
-        return num / 100000;
-    }
-    private int getThousands(int num, char op){
-        if(op == '%'){
-            return num % 1000;
-        }
-        return num / 1000;
-    }
-    private int getHundreds(int num, char op){
-        if(op == '%'){
-            return num % 100;
-        }
-        return num / 100;
-    }
-    private int getTens(int num, char op){
-        if(op == '%'){
-            return num % 10;
-        }
-        return num / 10;
+        return result.toString().trim();
     }
 }

@@ -32,7 +32,9 @@ https://leetcode.com/articles/interleaving-strings/
     }
     public boolean isInterleave(String s1, String s2, String s3) {
         //return is_Interleave(s1,0,s2,0,"",s3);
-    	
+		if (s3.length() != s1.length() + s2.length()) {
+			return false;
+		}
     	boolean[][] ret = new boolean[s1.length()+1][s2.length()+1];
     	
     	for(int i=0; i<ret.length; i++){

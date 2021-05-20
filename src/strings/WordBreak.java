@@ -36,18 +36,17 @@ public class WordBreak {
 	
 	public static void main(String[] args) {
 		WordBreak wordBreak = new WordBreak();
-		/*List<String> list = new ArrayList<>();
-		list.add("leet");
-		list.add("code");
-		System.out.println(wordBreak.wordBreak("leetcode", list));*/
-		
 		List<String> list = new ArrayList<>();
-		list.add("cats");
-		list.add("dog");
-		list.add("sand");
-		list.add("and");
-		list.add("cat");
-		System.out.println(wordBreak.wordBreak("catsandog", list));
+		//list.add("leet");
+		//list.add("code");
+	/*	list.add("le");
+		list.add("etc");
+		list.add("ode");
+		System.out.println(wordBreak.wordBreak("leetcode", list));*/
+		/*list.add("aa");
+		list.add("aaa");
+		System.out.println(wordBreak.wordBreak("aaaaaaaaaa", list));*/
+		System.out.println(wordBreak.wordBreak("catsandog", List.of("cats", "dog", "sand", "and", "cat")));
 	}
 
 	public boolean wordBreak(String s, List<String> wordDict) {
@@ -68,12 +67,12 @@ public class WordBreak {
 		bfs.offer(0);
 		
 		while(!bfs.isEmpty()){
-			
+			System.out.println(bfs);
 			int start = bfs.poll();
 			if(!visited[start]){
 				for(int i=start+1; i <= s.length(); i++){
+					//System.out.println(s.substring(start, i));
 					if(wordDict.contains(s.substring(start, i))){
-						System.out.println(s.substring(start, i));
 						bfs.add(i);
 						if(i == s.length()){
 							return true;
@@ -83,9 +82,7 @@ public class WordBreak {
 				visited[start] = true;
 			}
 		}
-		
 		return false;
-		
 	}
 	
 	 // backtracking 

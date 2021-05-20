@@ -10,9 +10,29 @@ public class MinimumNumberOfJumpsToReachEndOfArray {
 
 	
 	public static void main(String[] args){
-		findMinimumJumps(new int[]{1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9});
+		// findMinimumJumps(new int[]{1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9});
+		System.out.println(findMinimumJumps_alt(new int[]{1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9}));
 	}
-	
+
+	public static int findMinimumJumps_alt(int[] arr){
+		if(arr == null || arr.length == 0){
+			return 0;
+		}
+
+		int[] minJumps = new int[arr.length];
+		Arrays.fill(minJumps, arr.length);
+		minJumps[0] = 0;
+		for(int i = 0; i<arr.length; i++){
+			for(int j=i+1; j <= i + arr[i]; j++){
+				minJumps[j] = Math.min(minJumps[j], minJumps[i]+1);
+				if (j == arr.length-1) {
+					return minJumps[arr.length-1];
+				}
+			}
+		}
+		return 0;
+	}
+
 	public static void findMinimumJumps(int[] arr){
 		
 		if(arr == null || arr.length == 0){

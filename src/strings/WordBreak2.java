@@ -1,10 +1,6 @@
 package strings;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class WordBreak2 {
 
@@ -17,7 +13,8 @@ public class WordBreak2 {
 		wordDict.add("and");
 		wordDict.add("sand");
 		wordDict.add("dog");
-		System.out.println(wb2.wordBreak("catsanddog", wordDict));
+		// System.out.println(wb2.wordBreak("catsanddog", wordDict));
+		System.out.println(wb2.bfsSol("catsanddog", List.of("cat", "cats", "and", "sand", "dog")));
 	}
 
 	public List<String> wordBreak(String s, Set<String> wordDict) {
@@ -37,5 +34,45 @@ public class WordBreak2 {
 			dp[i] = list;
 		}
 		return dp[s.length()];
+	}
+
+	static class Pair {
+		public int start;
+		public Pair parent;
+		public Pair(int start, Pair parent) {
+			this.start = start;
+			this.parent = parent;
+		}
+	}
+
+	private List<String> bfsSol(String s, List<String> wordDict){
+
+		List<String> result = new ArrayList<>();
+		Queue<Pair> bfs = new LinkedList<>();
+		bfs.offer(new Pair(0, null));
+
+		while(!bfs.isEmpty()){
+			Pair p = bfs.poll();
+			for(int i = p.start+1; i <= s.length(); i++){
+				if(wordDict.contains(s.substring(p.start, i))){
+					bfs.add(new Pair(i, p));
+					if(i == s.length()){
+						StringBuilder sb = new StringBuilder();
+						int end = i;
+						Pair tempParent = p;
+						while (tempParent != null) {
+							sb.insert(0, s.substring(tempParent.start, end));
+							end = tempParent.start;
+							tempParent = tempParent.parent;
+							if (tempParent != null) {
+								sb.insert(0, " ");
+							}
+						}
+						result.add(sb.toString());
+					}
+				}
+			}
+		}
+		return result;
 	}
 }

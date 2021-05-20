@@ -72,9 +72,6 @@ public class SerializeDeserializeTree {
     	if(list.size() == 0){
     		return null;
     	}
-        while(list.get(0).equals("")){
-            list.remove(0);
-        }
     	if(list.get(0).equals("null")){
     		list.remove(0);
     		return null;

@@ -27,7 +27,7 @@ public class AllPossibleSumUniquePairs {
 		Arrays.sort(arr);
 		//eliminate duplicates
 		List<Integer> new_arr = new ArrayList<>();
-		for(int i=0, l=0; i<arr.length-1; i++){
+		for(int i = 0; i<arr.length-1; i++){
 			if(arr[i] != arr[i+1]){
 				new_arr.add(arr[i]);
 			}

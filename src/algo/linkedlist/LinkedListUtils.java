@@ -18,7 +18,23 @@ public class LinkedListUtils {
 		}
 		return head;
 	}
-	
+
+	public static ListNode createLinkedListNode(int[] input){
+		ListNode head = null;
+		ListNode prev = null;
+		for(int k : input){
+			ListNode n = new ListNode(k);
+			if(prev != null){
+				prev.next = n;
+			}
+			else{
+				head = n;
+			}
+			prev = n;
+		}
+		return head;
+	}
+
 	public static Node createCyclicLinkedList(int[] input){
 		Node head = null;
 		Node prev = null;
@@ -47,6 +63,14 @@ public class LinkedListUtils {
 			else if(head.next != null){
 				System.out.print("[ null, " + head.data + ", "+head.next.data+"]" );
 			}
+			head = head.next;
+		}
+		System.out.println();
+	}
+
+	public static void printListNode(ListNode head){
+		while(head != null){
+			System.out.print(head.val + ", " );
 			head = head.next;
 		}
 		System.out.println();

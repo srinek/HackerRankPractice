@@ -14,11 +14,14 @@ import java.util.TreeSet;
  * 
  * 
  * 
- * Design a search autocomplete system for a search engine. Users may input a sentence (at least one word and end with a special character '#'). For each character they type except '#', you need to return the top 3 historical hot sentences 
+ * Design a search autocomplete system for a search engine.
+ * Users may input a sentence (at least one word and end with a special character '#'). For each character they type except '#',
+ * you need to return the top 3 historical hot sentences
  * that have prefix the same as the part of sentence already typed. Here are the specific rules:
 
   The hot degree for a sentence is defined as the number of times a user typed the exactly same sentence before.
-  The returned top 3 hot sentences should be sorted by hot degree (The first is the hottest one). If several sentences have the same degree of hot, you need to use ASCII-code order (smaller one appears first).
+  The returned top 3 hot sentences should be sorted by hot degree (The first is the hottest one). If several sentences have the same degree of hot,
+  * you need to use ASCII-code order (smaller one appears first).
   If less than 3 hot sentences exist, then just return as many as you can.
   When the input is a special character, it means the sentence ends, and in this case, you need to return an empty list.
 
@@ -26,11 +29,15 @@ Your job is to implement the following functions:
 
 The constructor function:
 
-AutocompleteSystem(String[] sentences, int[] times): This is the constructor. The input is historical data. Sentences is a string array consists of previously typed sentences. Times is the corresponding times a sentence has been typed. Your system should record these historical data.
+AutocompleteSystem(String[] sentences, int[] times): This is the constructor. The input is historical data.
+* Sentences is a string array consists of previously typed sentences. Times is the corresponding times a sentence has been typed. Your system should record these historical data.
 
 Now, the user wants to input a new sentence. The following function will provide the next character the user types:
 
-List<String> input(char c): The input c is the next character typed by the user. The character will only be lower-case letters ('a' to 'z'), blank space (' ') or a special character ('#'). Also, the previously typed sentence should be recorded in your system. The output will be the top 3 historical hot sentences that have prefix the same as the part of sentence already typed.
+List<String> input(char c): The input c is the next character typed by the user.
+* The character will only be lower-case letters ('a' to 'z'), blank space (' ') or a special character ('#').
+* Also, the previously typed sentence should be recorded in your system.
+* The output will be the top 3 historical hot sentences that have prefix the same as the part of sentence already typed.
 
  
 Example:
@@ -45,7 +52,9 @@ Now, the user begins another search:
 Operation: input('i')
 Output: ["i love you", "island","i love leetcode"]
 Explanation:
-There are four sentences that have prefix "i". Among them, "ironman" and "i love leetcode" have same hot degree. Since ' ' has ASCII code 32 and 'r' has ASCII code 114, "i love leetcode" should be in front of "ironman". Also we only need to output top 3 hot sentences, so "ironman" will be ignored.
+There are four sentences that have prefix "i". Among them, "ironman" and "i love leetcode" have same hot degree.
+* Since ' ' has ASCII code 32 and 'r' has ASCII code 114, "i love leetcode" should be in front of "ironman".
+* Also we only need to output top 3 hot sentences, so "ironman" will be ignored.
 
 Operation: input(' ')
 Output: ["i love you","i love leetcode"]
@@ -68,7 +77,8 @@ Note:
 The input sentence will always start with a letter and end with '#', and only one blank space will exist between two words.
 The number of complete sentences that to be searched won't exceed 100. The length of each sentence including those in the historical data won't exceed 100.
 Please use double-quote instead of single-quote when you write test cases even for a character input.
-Please remember to RESET your class variables declared in class AutocompleteSystem, as static/class variables are persisted across multiple test cases. Please see here for more details.
+Please remember to RESET your class variables declared in class AutocompleteSystem, as static/class variables are persisted across multiple test cases.
+* Please see here for more details.
  */
 public class AutocompleteSystem {
 	
@@ -147,17 +157,27 @@ public class AutocompleteSystem {
 	
 	
 	private TrieNode root = new TrieNode(null);  // null node
-	
-	
+	TrieNode searchCurrent;
+	String searchStr = "";
+
+	public AutocompleteSystem(String[] sentences, int[] times) {
+		int i = 0;
+		this.searchCurrent = root;
+		this.searchStr = "";
+		for(String sentence : sentences){
+			insertWord(sentence, times[i++]);
+		}
+	}
+
 	//nanda
 	public boolean insertWord(String sentence, int weight){
 		if(sentence.length() == 0){
 			return false;
 		}
-        return insertHelper(sentence, root, weight);
-		
+		return insertHelper(sentence, root, weight);
+
 	}
-	
+
 	private boolean insertHelper(String sentence, TrieNode current, int weight){
 		char c = sentence.charAt(0);
 		TrieNode temp = current.find(c);
@@ -171,7 +191,7 @@ public class AutocompleteSystem {
 			}
 			return insertHelper(sentence.substring(1), temp, weight);
 		}
-		
+
 		if(sentence.length() == 1){
 			temp.setEndOfWord(true);
 			temp.setWeight(temp.getWeight()+weight);
@@ -180,17 +200,6 @@ public class AutocompleteSystem {
 		return insertHelper(sentence.substring(1), temp, weight);
 	}
 
-	public AutocompleteSystem(String[] sentences, int[] times) {
-		int i = 0;
-		this.searchCurrent = root;
-		this.searchStr = "";
-		for(String sentence : sentences){
-			insertWord(sentence, times[i++]);
-		}
-	}
-    
-	TrieNode searchCurrent = root;
-	String searchStr = "";
 	public List<String> input(char c) {
 		
 		List<WeightedSentence> result = new ArrayList<>();

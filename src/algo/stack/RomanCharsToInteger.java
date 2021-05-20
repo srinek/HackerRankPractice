@@ -40,7 +40,6 @@ Output: 9
 Example 4:
 
 Input: "LVIII"
-Output: 58
 Explanation: L = 50, V= 5, III = 3.
 Example 5:
 
@@ -51,8 +50,52 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 public class RomanCharsToInteger {
 
 	
-	
+	// if small number is immediately before a big number, subtract small number from big number.
+
 	public int romanToInt(String s) {
+		if (s == null) {
+			return 0;
+		}
+		char[] romanChars = s.toCharArray();
+		Map<String, Integer> map = getMap();
+		Stack<Integer> stack = new Stack<>();
+		for (int i = 0; i < romanChars.length; i++) {
+			int val = map.get(romanChars[i]+"");
+			if (!stack.isEmpty() && stack.peek() < val) {
+				stack.push(val - stack.pop());
+			} else {
+				stack.push(val);
+			}
+		}
+		int sum = 0;
+		while (!stack.isEmpty()) {
+			sum += stack.pop();
+		}
+		return sum;
+	}
+
+	private Map<String, Integer> getMap() {
+
+		Map<String, Integer> map = new HashMap<>();
+
+		map.put("I", 1);
+		map.put("V", 5);
+		map.put("X", 10);
+		map.put("L", 50);
+		map.put("C", 100);
+		map.put("D", 500);
+		map.put("M", 1000);
+		map.put("IV", 4);
+		map.put("IX", 9);
+		map.put("XL", 40);
+		map.put("XC", 90);
+		map.put("CD", 400);
+		map.put("CM", 900);
+
+		return map;
+	}
+
+	public int romanToInt_old(String s) {
 
 		if (s == null) {
 			return 0;
@@ -101,26 +144,5 @@ public class RomanCharsToInteger {
 			return stack.peek();
 		}
 		return null;
-	}
-
-	private Map<String, Integer> getMap() {
-
-		Map<String, Integer> map = new HashMap<>();
-
-		map.put("I", 1);
-		map.put("V", 5);
-		map.put("X", 10);
-		map.put("L", 50);
-		map.put("C", 100);
-		map.put("D", 500);
-		map.put("M", 1000);
-		map.put("IV", 4);
-		map.put("IX", 9);
-		map.put("XL", 40);
-		map.put("XC", 90);
-		map.put("CD", 400);
-		map.put("CM", 900);
-
-		return map;
 	}
 }

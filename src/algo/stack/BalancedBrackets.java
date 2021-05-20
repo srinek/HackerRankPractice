@@ -5,8 +5,10 @@ import java.util.Stack;
 
 public class BalancedBrackets {
 
+	// could be done better with HashMap and HashSet.
 	public static char[] OPEN = new char[] { '(', '{', '[' };
 
+	// ({[]})  {(){}[]}
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		int t = in.nextInt();
@@ -47,6 +49,7 @@ public class BalancedBrackets {
 		return false;
 	}
 
+	// this is better with HashMap
 	private static char getMatchingBracket(char bracket) {
 		if(bracket == ')'){
 			return '(';

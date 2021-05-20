@@ -1,8 +1,6 @@
 package trees;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 //  https://leetcode.com/problems/longest-absolute-file-path/
 /*
@@ -42,22 +40,109 @@ Notice that a/aa/aaa/file1.txt is not the longest file path, if there is another
  */
 public class LongestAbsoluteFilePath {
 
-	
+
+	public static final String PATH_SEPARATOR = "\n";
+
 	public static void main(String[] args) {
 		LongestAbsoluteFilePath test = new LongestAbsoluteFilePath();
-		//int maxLength =  test.lengthLongestPath("a\n\tbb\n\t\tb1\n\t\tb.txt\n\tccc\n\t\tc1\n\t\tc.txt");
-		//int maxLength =  test.lengthLongestPath("dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext");
-		//int maxLength =  test.lengthLongestPath("a\n\tb\n\t\tc");
-		int maxLength =  test.lengthLongestPath("dir\n    file.txt");
-		//int maxLength =  test.lengthLongestPath("dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext");
-		System.out.println(maxLength);
+		/*System.out.println(test.lengthLongestPath("a\n\tbb\n\t\tb1\n\t\tb.txt\n\tccc\n\t\tc1\n\t\tc.txt"));
+		System.out.println(test.lengthLongestPath("a\n\tb\n\t\tc.txt")); //9
+		System.out.println(test.lengthLongestPath("file name with  space.txt")); // 25
+		System.out.println(test.lengthLongestPath("dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext")); //32
+		System.out.println(test.lengthLongestPath("a\n\tb\n\t\tc")); // 0
+		System.out.println(test.lengthLongestPath("dir\n    file.txt")); //16
+		System.out.println(test.lengthLongestPath("dir\n        file.txt"));//16
+		System.out.println(test.lengthLongestPath("dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext")); // 20
+		System.out.println(test.lengthLongestPath("file1.txt\nfile2.txt\nlongfile.txt")); //12*/
+		System.out.println(test.lengthLongestPath("a\n\tb.txt\na2\n\tb2.txt")); //9
 	}
+
+	// a
+	//   b.txt
+	// a2
+	//   b2.txt
+	public int lengthLongestPath1(String input) {
+		String[] splits = input.split("\n");
+		Map<Integer, Integer> map = new HashMap<>();
+		int level = 0;
+		map.put(level, -1);
+		int curLen = 0, maxL = 0;
+		for (String s : splits) {
+			String[] sp = s.split("\t");
+			int len = sp.length;
+			int parentLen = map.get(len-1);
+			curLen = sp[len-1].length() + parentLen + 1;
+			map.put(len, curLen);
+			if (s.contains(".")) {
+				maxL = Math.max(maxL, curLen);
+			}
+		}
+		return maxL;
+	}
+
+	public int lengthLongestPath(String input) {
+		if (input == null) {
+			return 0;
+		}
+		final Map<Integer, LinkedList<Node>> levels = new HashMap<>();
+		final String[] dirs = input.split(PATH_SEPARATOR);
+		Node parent = null;
+		var longestPath = 0;
+		for (var i=0; i<dirs.length; i++) {
+			final var temp = dirs[i];
+			var level = 0;
+			while (temp.charAt(level) == '\t') {
+				level++;
+			}
+			var queue = levels.get(level);
+			if (queue == null) {
+				queue = new LinkedList();
+			}
+			final var prevLevel = levels.get(level-1);
+			if (prevLevel != null) {
+				parent = prevLevel.peekLast();
+			} else {
+				parent = null;
+			}
+			final var tNode = new Node(parent, temp.replaceAll("(\t)*", ""));
+			queue.add(tNode);
+			levels.put(level, queue);
+			if (tNode.isFile()) {
+				// System.out.println("path "+tNode.val);
+				longestPath = tNode.pathSize > longestPath ? tNode.pathSize : longestPath;
+			}
+		}
+		return longestPath;
+	}
+
+
+	private static class Node {
+		public final Node parent;
+		public final String val;
+		public final int pathSize;
+		Node(final Node parent, final String val){
+			this.parent = parent;
+			this.val = val;
+			if (parent != null && !parent.isFile()) {
+				pathSize = this.parent.pathSize + 1 +this.val.length();
+			} else {
+				pathSize = this.val.length();
+			}
+		}
+
+		public boolean isFile() {
+			return val.matches(".*\\..*");
+		}
+	}
+
 	
+	/*
+
 	public int lengthLongestPath(String input) {
 		input = replaceLevels(input, "\n", 0);
 		return maxLength(input, 1);
 	}
-	
+
 	public String replaceLevels(String input, String levelStr, int level){
 		if(input.contains("\t")){
 			input = input.replaceAll(levelStr+"\t", "l"+(level+1));
@@ -95,7 +180,7 @@ public class LongestAbsoluteFilePath {
 			maxLength += temp;
 		}
 		return maxLength;
-	}
+	}*/
 	
 	/*
 	public int lengthLongestPath(String input) {

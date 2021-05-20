@@ -7,7 +7,9 @@ public class TrappingRainWater {
 	
 	public static void main(String[] args) {
 		TrappingRainWater water = new TrappingRainWater();
-		System.out.println(water.trapStacks(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
+		// System.out.println(water.trapStacks(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
+		// System.out.println(water.trapStacks(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
+		System.out.println(water.trapStacks(new int[]{2,1,0,1,3}));
 	}
 	
 	public int trap(int[] h) {
@@ -63,16 +65,18 @@ public class TrappingRainWater {
 	       Stack<Integer> s = new Stack<>();
 	       int i=0;
 	       while(i<h.length){
-	    	   
 	    	   if(s.isEmpty() || h[i] <= h[s.peek()]){
 	    		   s.push(i++);
 	    	   }
 	    	   else{
-	    		   int bottom = s.pop();
-	    		   ans +=  s.isEmpty() ? 0 :  ( Math.min(h[s.peek()], h[i]) - h[bottom] ) * (i-s.peek()-1) ;
+				   int bottom = s.pop();
+				   if (!s.isEmpty()) {
+					   int min = Math.min(h[s.peek()], h[i]);
+					   int res = (min - h[bottom]) * (i - s.peek() - 1);
+					   ans +=  res;
+				   }
 	    	   }
 	       }
-	       
 	       return ans;
 	}
 }

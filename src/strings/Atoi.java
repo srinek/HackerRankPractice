@@ -7,7 +7,7 @@ public class Atoi {
 	public static void main(String[] args) {
 		
 		Atoi atoi = new Atoi();
-		System.out.println(atoi.myAtoi("-91283472332"));
+		System.out.println(atoi.myAtoi("-91283472332900909345353534"));
 	}
 	
 	public int myAtoi(String str) {
@@ -37,16 +37,10 @@ public class Atoi {
 					return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
 				}
 				total = total*10 + digit;
-				
+				index++;
 			}
-            else{
-                break;
-            }
-			index++;
+			break;
 		}
-	
-		
-		
 		return sign*total;
     }
 

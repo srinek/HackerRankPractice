@@ -1,5 +1,8 @@
 package trees;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /*
  * Given a non-empty binary tree, find the maximum path sum.
 
@@ -51,6 +54,29 @@ int maxValue;
 }
 
 class TreeNode {
+    public static TreeNode fromArray(Integer[] arr) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        TreeNode root = new TreeNode(arr[0]);
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        int i = 1;
+        while (!q.isEmpty() && i < arr.length) {
+            TreeNode node = q.poll();
+            if (arr[i] != null) {
+                node.left = new TreeNode(arr[i]);
+                q.offer(node.left);
+            }
+            i++;
+            if (i < arr.length && arr[i] != null) {
+                node.right = new TreeNode(arr[i]);
+                q.offer(node.right);
+            }
+            i++;
+        }
+        return root;
+    }
 	int val;
 	TreeNode left;
 	TreeNode right;
@@ -58,4 +84,25 @@ class TreeNode {
 	TreeNode(int x) {
 		val = x;
 	}
+
+	public String toString() {
+	    StringBuilder str = new StringBuilder();
+	    str.append("[");
+	    str.append(this.val);
+        str.append(",");
+	    if (left != null) {
+            str.append(left.toString());
+        } else {
+            str.append("null");
+        }
+        str.append(",");
+        if (right != null) {
+            str.append(right.toString());
+        } else {
+            str.append("null");
+        }
+        str.append("]");
+        return str.toString();
+    }
+
 }

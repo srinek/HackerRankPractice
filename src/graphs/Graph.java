@@ -99,8 +99,12 @@ public class Graph<T> {
 			s.push(v);
 		}
 	}
-	
-	public boolean isStronglyConnectedComponent(){
+
+	/**
+	 * https://www.geeksforgeeks.org/connectivity-in-a-directed-graph/
+	 * @return
+	 */
+	public boolean isStronglyConnected(){
 		Stack<Vertex<T>> s = new Stack<>();
 		this.dfs(s);
 		//check if this is a forest ?

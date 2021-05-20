@@ -1,6 +1,7 @@
 package algo.sort;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /*
@@ -43,6 +44,7 @@ public class KClosestPointsInOrigin {
 		
 	}
 
+	Random random = new Random();
 	public int[][] kClosest(int[][] points, int k) {
 
 		if (points == null) {
@@ -61,11 +63,13 @@ public class KClosestPointsInOrigin {
 		if( l < r){
 			
 			int p = partition(points, l, r, k);
-			int leftCount = p - l + 1;
-			if(k  < leftCount){
+			if (k == p) {
+				return;
+			}
+			if(k  < p){
 				qSort(points, l, p-1, k);	
 			}
-			else if(k > leftCount){
+			else if(k > p){
 				qSort(points, p+1, r, k);
 			}
 		}
@@ -74,25 +78,25 @@ public class KClosestPointsInOrigin {
 	
 	private int partition(int[][] points, int l, int r, int k){
 		
-		int pivotIndex = ThreadLocalRandom.current().nextInt(l, r);
+		int pivotIndex = l + random.nextInt(r - l);
 		
 		swap(points, pivotIndex, r);
 		
 		int pivotDist = dist(points[r]);
 		
-		int i=l, j = i;
+		int ptr=l;
 		
-		for(; j<r ; j++){
+		for(int i=l; i<r ; i++){
 			
-			if(dist(points[j]) < pivotDist){
-				swap(points, i, j);
-				i++;
+			if(dist(points[i]) < pivotDist){
+				swap(points, i, ptr);
+				ptr++;
 			}
 		}
 		
-		swap(points, i, j);
+		swap(points, ptr, r);
 		
-		return i;
+		return ptr;
 	}
 	
 	private int dist(int[] point){

@@ -3,6 +3,9 @@ package algo.stack;
 import java.util.Scanner;
 import java.util.Stack;
 
+/**
+ * https://www.hackerrank.com/challenges/poisonous-plants/problem
+ */
 public class PoinsonousTree {
 
 	 public static void main(String[] args) {

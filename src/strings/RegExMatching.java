@@ -57,19 +57,25 @@ public class RegExMatching {
 		if(p == null || p.isEmpty()){
 			return t == null || t.isEmpty();
 		}
-	
-		boolean first_match = t.charAt(0) == p.charAt(0) || 
-				p.charAt(0) == '.';
+
+		boolean firstMatch = false;
+		if (t.length() > 0 ) {
+			firstMatch = (t.charAt(0) == p.charAt(0)) || (p.charAt(0) == '.');
+		}
 		
 		if(p.length() >=2 && p.charAt(1) == '*'){
 			return isMatch(t, p.substring(2)) || 
-					(first_match && isMatch(t.substring(1), p));
+					(firstMatch && isMatch(t.substring(1), p));
 		}
 		else{
-			return first_match && isMatch(t.substring(1), p.substring(1));
+			return firstMatch && isMatch(t.substring(1), p.substring(1));
 		}
 	}
-	
+
+	public static void main(String[] args) {
+		RegExMatching r = new RegExMatching();
+		System.out.println(r.isMatch("aa", "a*"));
+	}
 	
 
 }

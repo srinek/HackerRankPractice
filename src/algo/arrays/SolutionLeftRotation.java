@@ -31,9 +31,9 @@ public class SolutionLeftRotation {
 	}
 	
 	public int[] leftRotate(int[] a, int rotateBy){
-		
+
 		int mod = rotateBy/a.length;
-		if( mod > 0 ) {
+		if( mod > 0 ) { // using modulo above
 			rotateBy = rotateBy  - mod * a.length ;
 		}
 		int[] barr = new int[a.length];

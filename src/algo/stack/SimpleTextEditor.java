@@ -3,6 +3,10 @@ package algo.stack;
 import java.util.Scanner;
 import java.util.Stack;
 
+/**
+ * https://www.hackerrank.com/challenges/simple-text-editor/problem
+ */
+
 public class SimpleTextEditor {
 
 	

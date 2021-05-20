@@ -7,7 +7,6 @@ public class MyHashSet {
     /** Initialize your data structure here. */
     public MyHashSet() {
         this.bucket = new ListNode[10000];
-        
     }
     
     private int getBucketIndex(int key){

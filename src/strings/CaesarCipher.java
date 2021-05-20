@@ -1,6 +1,5 @@
 package strings;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /*Julius Caesar protected his confidential information by encrypting it in a cipher. Caesar's cipher rotated every letter in a string by a fixed number,K , 

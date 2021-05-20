@@ -12,7 +12,8 @@ import java.util.Scanner;
  * 
  * https://www.hackerrank.com/contests/gs-codesprint/challenges/buy-maximum-stocks/problem
  * 
- * In a stock market, there is a product with its infinite stocks. The stock prices are given for  days, where denotes the price of the stock on the  day. There is a rule that a customer can buy at most  stock on the  day. If the customer has an amount of  dollars initially, find out the maximum number of stocks they can buy?
+ * In a stock market, there is a product with its infinite stocks. The stock prices are given for  days, where denotes the price of the stock on the  day. There is a rule that a customer can buy at most  stock on the  day.
+ * If the customer has an amount of  dollars initially, find out the maximum number of stocks they can buy?
 
 For example, for  days the price of a stock is given as . You can buy  stock worth  on day , stocks worth  each on day  and  stocks worth  each on day . If , you can buy all the stocks (total ) for .
 

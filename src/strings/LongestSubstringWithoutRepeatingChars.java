@@ -18,7 +18,9 @@ Input: "pwwkew"
 Output: 3
 Explanation: The answer is "wke", with the length of 3. 
              Note that the answer must be a substring, "pwke" is a subsequence and not a substring.*/
-             
+
+import java.util.Arrays;
+
 /*
  * 
  */
@@ -26,11 +28,36 @@ public class LongestSubstringWithoutRepeatingChars {
 	
 	public static void main(String[] args) {
 		LongestSubstringWithoutRepeatingChars test = new LongestSubstringWithoutRepeatingChars();
-		//System.out.println(test.lengthOfLongestSubstring("dvdf"));
+		System.out.println(test.lengthOfLongestSubstring("dvdf"));
 		System.out.println(test.lengthOfLongestSubstring("abba"));
+		System.out.println(test.lengthOfLongestSubstring("abcabcbb"));
+		System.out.println(test.lengthOfLongestSubstring("bbbbb"));
+		System.out.println(test.lengthOfLongestSubstring("pwwkew"));
+	}
+
+	public int lengthOfLongestSubstring(String s) {
+		if(s == null){
+			return 0;
+		}
+		int[] buffer = new int[255];
+		Arrays.fill(buffer, -1);
+		char[] chars = s.toCharArray();
+		int total = 0;
+		int i=0;
+		int j;
+		for(j=0; j<chars.length; j++){
+			if (buffer[s.charAt(j)] != -1) {
+				int oldIndex = buffer[s.charAt(j)];
+				total = Math.max(total, j-i);
+				i = oldIndex+1;
+			}
+			buffer[s.charAt(j)] = j;
+		}
+		total = Math.max(total, j-i);
+		return total;
 	}
 	
-	public int lengthOfLongestSubstring(String s) {
+	public int lengthOfLongestSubstring_old(String s) {
 		
 		if(s == null){
 			return 0;

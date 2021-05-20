@@ -3,7 +3,8 @@ package algo.arrays;
 import java.util.Arrays;
 
 /*
- * mary has n (always even) chocolates, which she has to share half with her brother. She wants to make sure she gets maximum unique chocolates. Find how many max unique chocolates she can get.
+ * mary has n (always even) chocolates, which she has to share half with her brother.
+ * She wants to make sure she gets maximum unique chocolates. Find how many max unique chocolates she can get.
  * for Ex : [3,4,6,6, 7, 7] - should return 3
  *          [80,80,80,80, 6757774, 80, 80, 123221] - should return 3.  
  */

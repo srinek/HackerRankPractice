@@ -28,7 +28,7 @@ public class CircleOfStrings {
 			}
 		}
 		
-		if(g.isStronglyConnectedComponent()){
+		if(g.isStronglyConnected()){
 			
 			for(Vertex<Character> v : g.getVertexList()){
 				if(v.getOutDegree() != v.getInDegree()){

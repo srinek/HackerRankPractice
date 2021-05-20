@@ -33,8 +33,9 @@ public class SearchInRotatedSortedArray {
 	
 	public static void main(String[] args) {
 	   SearchInRotatedSortedArray sol = new SearchInRotatedSortedArray();
-	   //System.out.println(sol.search(new int[]{3,1}, 3));
-	   System.out.println(sol.search(new int[]{4,5,6,7,0,1,2}, 0));
+	   System.out.println(sol.search(new int[]{1}, 1));
+	   System.out.println(sol.search(new int[]{3,1}, 3));
+	   System.out.println(sol.search(new int[]{4,5,6,7,0,1,2}, 3));
 	}
 
 	//[4,5,6,7,0,1,2]

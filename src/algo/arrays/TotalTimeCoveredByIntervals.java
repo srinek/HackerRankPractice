@@ -3,9 +3,12 @@ package algo.arrays;
 import java.util.Arrays;
 import java.util.Stack;
 
-/*
+/**
  * https://careercup.com/question?id=5687609083297792
  * https://www.geeksforgeeks.org/merging-intervals/
+ *
+ * Given a set of time intervals in any order, merge all overlapping intervals into one and output the result which should have only mutually exclusive intervals. Let the intervals be represented as pairs of integers for simplicity.
+ * For example, let the given set of intervals be {{1,3}, {2,4}, {5,7}, {6,8}}. The intervals {1,3} and {2,4} overlap with each other, so they should be merged and become {1, 4}. Similarly, {5, 7} and {6, 8} should be merged and become {5, 8}
  */
 //(1,4) ,  (6,8), (2,4), (7,9), (10,15)
 public class TotalTimeCoveredByIntervals {
@@ -13,7 +16,13 @@ public class TotalTimeCoveredByIntervals {
 	public static void main(String[] args) {
 		TotalTimeCoveredByIntervals timer = new TotalTimeCoveredByIntervals();
 		
-		TimeSlot[] intervals = new TimeSlot[]{new TimeSlot(1,4),  new TimeSlot(6,8), new TimeSlot(2,4), new TimeSlot(7,9), new TimeSlot(10,15)};
+		TimeSlot[] intervals = new TimeSlot[] {
+			new TimeSlot(1,4),
+			new TimeSlot(6,8),
+			new TimeSlot(2,4),
+			new TimeSlot(7,9),
+			new TimeSlot(10,15)
+		};
 		System.out.println(timer.timeCoveredByIntervals(intervals));
 	}
 

@@ -3,7 +3,7 @@ package trees;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/*
+/**
  * https://leetcode.com/problems/snakes-and-ladders/
  * 
  * On an N x N board, the numbers from 1 to N*N are written boustrophedonically starting from the bottom left of the board, and alternating direction each row.  For example, for a 6 x 6 board, the numbers are written as follows:
@@ -16,7 +16,8 @@ You choose a destination square S with number x+1, x+2, x+3, x+4, x+5, or x+6, p
 If S has a snake or ladder, you move to the destination of that snake or ladder.  Otherwise, you move to S.
 A board square on row r and column c has a "snake or ladder" if board[r][c] != -1.  The destination of that snake or ladder is board[r][c].
 
-Note that you only take a snake or ladder at most once per move: if the destination to a snake or ladder is the start of another snake or ladder, you do not continue moving.  (For example, if the board is `[[4,-1],[-1,3]]`, and on the first move your destination square is `2`, then you finish your first move at `3`, because you do not continue moving to `4`.)
+Note that you only take a snake or ladder at most once per move: if the destination to a snake or ladder is the start of another snake or ladder, you do not continue moving.
+* (For example, if the board is `[[4,-1],[-1,3]]`, and on the first move your destination square is `2`, then you finish your first move at `3`, because you do not continue moving to `4`.)
 
 Return the least number of moves required to reach square N*N.  If it is not possible, return -1.
 
@@ -46,7 +47,7 @@ The board square with number N*N has no snake or ladder.
  */
 public class SnakesAndLadders {
 	
-public int snakesAndLadders(int[][] board) {
+    public int snakesAndLadders(int[][] board) {
         
         if(board == null){
             return 0;

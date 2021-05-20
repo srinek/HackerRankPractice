@@ -36,6 +36,7 @@ public class GroupAnagrams {
 	            char[] ca = s.toCharArray();
 	            Arrays.sort(ca);
 	            List<String> resultList = resultMap.getOrDefault(String.valueOf(ca), new ArrayList<>());
+				//resultMap.computeIfAbsent(String.valueOf(ca), (v) -> new ArrayList<String>()).add(s);
 	            resultList.add(s);
 	            resultMap.put(String.valueOf(ca), resultList);
 	        }

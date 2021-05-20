@@ -59,7 +59,6 @@ public class LongestPalindromeSubstring {
 				}
 			}
 		}
-		
 		return result;
 	}
 }

@@ -27,11 +27,20 @@ package trees;
  * 
  * The given tree [4,2,6,1,3,5,7] is represented by the following diagram:
  * 
- * 4 / \ 2 6 / \ / \ 1 3 5 7
+ * 4
+  /  \
+  2    6
+ / \  / \
+1 3   5  7
  * 
  * while the diagrams for the outputs are:
  * 
- * 4 / \ 3 6 and 2 / \ / 5 7 1 Note:
+ *  4
+ * / \
+ * 3 6
+ * and
+ *  2
+ * / \ / 5 7 1 Note:
  * 
  * The size of the BST will not exceed 50. The BST is always valid and each
  * node's value is different.
